@@ -1,6 +1,7 @@
 'use strict';
 var crypto = require('crypto');
 var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
 
 var schema = new mongoose.Schema({
     order_item_id: {
