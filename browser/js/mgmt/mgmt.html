@@ -1,19 +1,23 @@
 <div id="mgmt">
 <h3>All products</h3>
-	<div class="prods">
+	<div class="col-xs-12 even">
+		<div class="col-xs-3"><h5>Make changes</h5></div>
+		<div class="col-xs-4"><h5>Product Name</h5></div>
+		<div class="col-xs-2"><h5>Stock</h5></div>
+		<div class="col-xs-2"><h5>Price</h5></div>
+	</div>
 	<div ng-repeat="prod in products" ng-class-even="'even'" class="col-xs-12">
 		<div class="col-xs-3">Edit</div>
 		<div class="col-xs-4"><b>{{prod.name}}</b></div>
 		<div class="col-xs-2">{{prod.quantity}}</div>
 		<div class="col-xs-2">${{prod.unit_price | number:2}}</div>
 	</div>
-	</div>
 
 <p class="clearfix"></p>
 <h3>All orders</h3>
 	<div ng-repeat="order in orders">
 		<div class="title">
-			<span class="pull-left"><b>${{order.amount | number: 2}}</b></span>
+			<span class="pull-left"><b>Total: ${{order.amount | number: 2}}</b></span>
 			<span class="pull-right">{{order.date_created | date: 'M/d/yy h:mm a'}}</span>
 
 		</div>

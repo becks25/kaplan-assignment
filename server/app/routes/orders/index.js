@@ -25,31 +25,23 @@ router.get('/', (req, res, next) => {
 //create one
 router.post('/', (req, res, next) => {
   req.body.order.date_created = Date.now();
-  console.log('before', req.body.order);
 
-  // Order.create(req.body.order)
-  //   .then(ord => res.status(201).send(ord))
-  //   .then(null, next);
-  var order = req.body.order;
-  var order_items = req.body.order_items;
   Order.create(order)
   .then(ord => {
-      console.log('order made', ord);
-      // create each order_item product
-      var count = order_items.length;
 
-      for(var i = 0; i < count; i++) order_items[i].order_id = ord;
-    
-      Order_item.create(order_items)
+      //create individual order items
+      createOrderItems(ord, req.body.order_items)
       .then(items => {
         console.log(items);
-        res.status(201).send(ord);
+
+        res.status(201).send(ord)
+        // updateProducts(items)
+        // .then(updated => res.status(201).send(ord));
+        
       })
       .then(null, next);
 
-      // res.send(201).send(ord);
     })
-    //create order_itmes
   .then(null, next);
 
 });
@@ -59,27 +51,12 @@ function createOrderItems(order, items){
 
   for(var i = 0; i < count; i++) items[i].order_id = order._id;
     
-  console.log('items', items, order);
-
-  return Order_item.createAsynch(items);
+  return Order_item.create(items);
 
 
 }
 
-// router.put('/:productId', (req,res,next) =>{
-//   if(req.user){
-//     _.assign(req.product, req.body);
-//     req.product.save()
-//       .then(prod => res.status(200).send(prod))
-//       .then(null, next);
-//   } next();
-// });
-
-// router.delete('/:productId', (req, res, next) => {
-//   if(req.user){
-//     Product.remove({_id:req.product._id}).exec()
-//       .then(removed => res.status(200).send(removed))
-//       .then(null, next);
-//   } next();
-// })
+function updateProducts(prods){
+ //update the products as well
+}
 
