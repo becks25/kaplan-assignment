@@ -15,6 +15,21 @@ body {
 }
 
 
+.back{
+	width:10%;
+	border: 2px solid #77c530;
+	border-radius:5px;
+	padding:1%;
+	background-color: rgba(#77c530, 0.3);
+	margin:1%;
+}
+
+h1{
+	text-align:center;
+	color:#3c5d1e;
+	margin-top:0;
+
+}
 @import 'home/main';
 @import 'login/main';
 @import 'client/main';
