@@ -30,12 +30,21 @@ router.post('/', (req, res, next) => {
 });
 
 router.put('/:productId', (req,res,next) =>{
-  if(req.user){
+
+  //when someone makes a purchase, the product inventory should update
+  if(req.body.prod.sold_quantity){
+    Product.findOne({_id: req.body.prod.product_sku})
+    .then(prod => {
+      prod.quantity -= req.body.prod.sold_quantity;
+      prod.save()
+        .then(p => res.status(200).send(p));
+    })
+  }else{
     _.assign(req.product, req.body);
     req.product.save()
       .then(prod => res.status(200).send(prod))
       .then(null, next);
-  } next();
+    }
 });
 
 router.delete('/:productId', (req, res, next) => {

@@ -5,7 +5,7 @@ var mongoose = require('mongoose');
 var _ = require('lodash');
 var Order = mongoose.model('Order');
 var Order_item = mongoose.model('OrderItem');
-
+var Product = mongoose.model('Product');
 
 //get all orders & items
 router.get('/', (req, res, next) => {
@@ -26,7 +26,7 @@ router.get('/', (req, res, next) => {
 router.post('/', (req, res, next) => {
   req.body.order.date_created = Date.now();
 
-  Order.create(order)
+  Order.create(req.body.order)
   .then(ord => {
 
       //create individual order items
@@ -35,8 +35,6 @@ router.post('/', (req, res, next) => {
         console.log(items);
 
         res.status(201).send(ord)
-        // updateProducts(items)
-        // .then(updated => res.status(201).send(ord));
         
       })
       .then(null, next);
@@ -56,7 +54,8 @@ function createOrderItems(order, items){
 
 }
 
-function updateProducts(prods){
- //update the products as well
-}
+
+
+
+
 
