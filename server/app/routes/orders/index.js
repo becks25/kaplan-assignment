@@ -9,7 +9,7 @@ var Order_item = mongoose.model('OrderItem');
 
 //get all orders & items
 router.get('/', (req, res, next) => {
-  if(req.user){
+  // if(req.user){
     Order.find()
     .then(orders =>{
       Order_item.find()
@@ -18,7 +18,7 @@ router.get('/', (req, res, next) => {
         })
     })
     .then(null, next);
-  } next();
+  // };
 });
 
 
@@ -30,18 +30,20 @@ router.post('/', (req, res, next) => {
   // Order.create(req.body.order)
   //   .then(ord => res.status(201).send(ord))
   //   .then(null, next);
-  Order.create(req.body.order)
+  var order = req.body.order;
+  var order_items = req.body.order_items;
+  Order.create(order)
   .then(ord => {
       console.log('order made', ord);
       // create each order_item product
-      var count = req.body.order_items.length;
+      var count = order_items.length;
 
-      for(var i = 0; i < count; i++) req.body.order_items[i].order_id = ord._id;
+      for(var i = 0; i < count; i++) order_items[i].order_id = ord;
     
-      Order_item.create(req.body.order_items)
+      Order_item.create(order_items)
       .then(items => {
         console.log(items);
-        res.status(201).send(items)
+        res.status(201).send(ord);
       })
       .then(null, next);
 
