@@ -4,25 +4,19 @@ var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
 var schema = new mongoose.Schema({
-    order_item_id: {
-        type: Number,
-        unique: true
-    },
-    sold_quantity: {
-        type: Number
-    },
-    unit_price: {
-        type: Number
-    },
+    sold_quantity: Number,
+    unit_price: Number,
     product_sku:{
         type: Schema.Types.ObjectId, 
-        ref: 'Product'
+        ref: 'Product',
+        unique: false
     },
     order_id: {
         type: Schema.Types.ObjectId, 
-        ref: 'Order'
+        ref: 'Order',
+        unique: false
     }
 });
 
 
-mongoose.model('Order_item', schema);
+mongoose.model('OrderItem', schema);

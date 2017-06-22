@@ -7,7 +7,7 @@ var connectToDb = require('./server/db');
 var User = Promise.promisifyAll(mongoose.model('User'));
 var Order = Promise.promisifyAll(mongoose.model('Order'));
 var Product = Promise.promisifyAll(mongoose.model('Product'));
-var Order_item = Promise.promisifyAll(mongoose.model('Order_item'));
+var Order_item = Promise.promisifyAll(mongoose.model('OrderItem'));
 
 
 User.remove({}, function(err, removed) {
@@ -43,19 +43,16 @@ var seedProducts = function(){
 
     var products = [
         {
-            sku: 1,
             name: 'oranges',
             quantity: 10,
             unit_price: 0.5
         },
         {
-            sku: 2,
             name: 'bananas',
             quantity: 10,
             unit_price: 0.4
         },
         {
-            sku: 3,
             name: 'pineapples',
             quantity: 10,
             unit_price: 0.7
@@ -69,7 +66,6 @@ var seedOrders = function(){
 
     var orders = [
         {
-            order_id: 1,
             amount: 8,
             created_date: Date.now()
         }
@@ -112,7 +108,10 @@ connectToDb.then(function () {
                 prods = products;
                 return seedOrders()
                 .then(function(orders){
-                    return seedOrderItems(prods, orders);
+                    return seedOrderItems(prods, orders)
+                        .then(function(items){
+                            return items;
+                        })
                 })
             })
         })

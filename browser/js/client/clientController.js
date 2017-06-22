@@ -1,4 +1,4 @@
-app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope) => {
+app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices) => {
   $scope.products = products;
   $scope.total = 0;
 
@@ -40,6 +40,10 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
     });
 
     //send order req
+    orderServices.createOrder(order, order_items)
+      .then(function(res){
+        console.log(res);
+      })
   }
 
 });

@@ -1,5 +1,5 @@
 'use strict';
-window.app = angular.module('KaplanAssignment', ['ui.router', 'ui.bootstrap', 'authFactory', 'productServices']);
+window.app = angular.module('KaplanAssignment', ['ui.router', 'ui.bootstrap', 'authFactory', 'productServices', 'orderServices']);
 
 app.config(function ($urlRouterProvider, $locationProvider) {
     // This turns off hashbang urls (/#about) and changes it to something normal (/about)
