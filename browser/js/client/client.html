@@ -3,8 +3,8 @@
 	<div class="order-form">
 		<div class="order" ng-repeat="prod in products">
 			<div class="col-xs-2">
-				<select ng-model="prod">
-					<option value="0">0</option>
+				<select ng-model="prod.order" ng-change="updateTotal()">
+					<option ng-repeat="n in getNumber(prod.quantity+1) track by $index" value="{{$index}}">{{$index}}</option>
 				</select>
 			</div>
 
@@ -15,10 +15,10 @@
 		</div>
 
 		<div class="total">
-			<p><b>Total: </b> ${{total}}</p>
+			<p><b>Total: </b> ${{total | number:2}}</p>
 		</div>
 		<div class="center">
-			<button>Submit order</button>
+			<button ng-click="submit()">Submit order</button>
 		</div>
 	</div>
 
