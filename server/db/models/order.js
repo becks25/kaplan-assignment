@@ -5,7 +5,6 @@ var mongoose = require('mongoose');
 var schema = new mongoose.Schema({
     amount: Number,
     date_created: Date
-    
 });
 
 

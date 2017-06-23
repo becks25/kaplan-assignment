@@ -1,4 +1,4 @@
-d'use strict';
+'use strict';
 
 // All used modules.
 var babel = require('gulp-babel');

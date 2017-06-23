@@ -21,26 +21,23 @@ router.get('/:name', (req, res, next) => {
 
 //create one
 router.post('/', (req, res, next) => {
-  console.log(req.body);
-  // if(req.user){
-      console.log(req.user);
       Product.create(req.body)
         .then(prod => res.status(201).send(prod))
         .then(null, next);
-  // } next();
 });
 
 router.put('/:productId', (req,res,next) =>{
 
   //when someone makes a purchase, the product inventory should update
-  if(req.body.prod){
-    Product.findOne({_id: req.body.prod.product_sku})
+  if(req.body.sold_quantity){
+    Product.findOne({_id: req.body.product_sku})
     .then(prod => {
-      prod.quantity -= req.body.prod.sold_quantity;
+      prod.quantity -= req.body.sold_quantity;
       prod.save()
         .then(p => res.status(200).send(p));
     })
-  }else{
+  }else{ 
+    //otherwise, we're just updating a product the regular way
     Product.findOne({_id:req.body._id})
     .then(prod => {
       _.assign(prod, req.body);
@@ -53,10 +50,8 @@ router.put('/:productId', (req,res,next) =>{
 });
 
 router.delete('/:productId', (req, res, next) => {
-  // if(req.user){
     Product.remove({_id:req.params.productId}).exec()
       .then(removed => res.status(200).send(removed))
       .then(null, next);
-  // } next();
 })
 

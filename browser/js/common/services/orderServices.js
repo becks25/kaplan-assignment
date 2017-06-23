@@ -10,13 +10,11 @@
             createOrder: function(order, items){
                 return $http.post(`api/orders`, {order: order, order_items: items})
                     .then(response => {
-
                         items.forEach(i => {
                             productServices.updateProduct(i);
                         });
-
                         return response.data
-                    })
+                    });
             },
 
             getOrders: function(){
