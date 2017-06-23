@@ -1,7 +1,14 @@
-app.controller('mgmtCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices, orders) => {
+app.controller('mgmtCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices, orders, productServices) => {
   $scope.products = products;
   $scope.orders = orders.orders;
   $scope.orderItems = orders.items;
+
+  $scope.newProduct = {};
+  $scope.errors = {
+    newMissing: false
+  }
+
+  $scope.success = false;
 
   $scope.fullOrders = function(){
     $scope.products.forEach(prod => {
@@ -14,5 +21,22 @@ app.controller('mgmtCtrl', ($scope, $state, products, $stateParams, $rootScope,o
   }
 
   $scope.fullOrders();
+
+  $scope.saveNew = function(){
+    $scope.errors.newMissing = false;
+
+    if($scope.newProduct.name && $scope.newProduct.quantity && $scope.newProduct.unit_price){
+      productServices.createProduct($scope.newProduct)
+        .then(res => {
+          $scope.products.push(res);
+          $scope.newProduct = {};
+          $scope.success = true;
+        });
+    }else{
+      console.log('uh');
+      $scope.errors.newMissing = true;
+      return
+    }
+  }
 
 });

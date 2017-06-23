@@ -1,11 +1,21 @@
 app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices) => {
   $scope.products = products;
   $scope.total = 0;
+  $scope.error = {
+    noItems: false
+  };
+  $scope.success = false;
 
   //initialize order settings
-  $scope.products.forEach(function(prod){
-    prod.order = '0';
-  });
+  $scope.resetForm = function(){
+    $scope.products.forEach(function(prod){
+      prod.order = '0';
+    });
+
+    $scope.error.noItems = false;
+  }
+
+  $scope.resetForm();
 
   $scope.getNumber = function(num) {
     return new Array(num);   
@@ -22,9 +32,16 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
   }
 
   $scope.submit = function(){
+    $scope.error.noItems = false;
+    //make sure at least one item has been selected
+    if($scope.total == 0){
+      $scope.error.noItems = true;
+      return;
+    }
     var order = {
       amount: $scope.total
     };
+
 
     var order_items = [];
 
@@ -43,7 +60,13 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
     orderServices.createOrder(order, order_items)
       .then(function(res){
         console.log(res);
+        //if it worked, reset everything & show success message
+        $scope.resetForm();
+        $scope.success = true;
+
       })
   }
+
+
 
 });

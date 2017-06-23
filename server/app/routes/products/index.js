@@ -21,12 +21,13 @@ router.get('/:name', (req, res, next) => {
 
 //create one
 router.post('/', (req, res, next) => {
-  if(req.user){
+  console.log(req.body);
+  // if(req.user){
       console.log(req.user);
       Product.create(req.body)
         .then(prod => res.status(201).send(prod))
         .then(null, next);
-  } next();
+  // } next();
 });
 
 router.put('/:productId', (req,res,next) =>{

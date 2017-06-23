@@ -49,6 +49,11 @@ h1{
 	background-color: rgba(#77c530, 0.3);
 }
 
+.error{
+	text-align:center;
+	color:#c32020;
+}
+
 @import 'home/main';
 @import 'login/main';
 @import 'client/main';

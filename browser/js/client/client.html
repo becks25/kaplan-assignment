@@ -26,6 +26,14 @@
 		<div class="total">
 			<p><h5><b>Total: </b> ${{total | number:2}}</h5></p>
 		</div>
+
+		<div class="error" ng-if="error.noItems">
+			<p>Please select the items you would like to order</p>
+		</div>
+
+		<div ng-if="success" class="even center"><p>Order successfully submitted</p></div>
+
+
 		<div class="center">
 			<div class="center"><button ng-click="submit()">Submit order</button></div>
 		</div>
