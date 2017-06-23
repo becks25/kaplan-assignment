@@ -14,9 +14,6 @@ var ngAnnotate = require('gulp-ng-annotate');
 var uglify = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 var eslint = require('gulp-eslint');
-var mocha = require('gulp-mocha');
-var karma = require('karma').server;
-var istanbul = require('gulp-istanbul');
 
 // Development tasks
 // --------------------------------------------------------------
