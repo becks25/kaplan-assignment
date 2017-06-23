@@ -39,4 +39,14 @@ app.controller('mgmtCtrl', ($scope, $state, products, $stateParams, $rootScope,o
     }
   }
 
+  $scope.deleteProduct = function(p){
+    productServices.deleteProduct(p)
+      .then(res => {
+        //something
+        console.log('yeah');
+
+        $state.reload();
+      })
+  }
+
 });

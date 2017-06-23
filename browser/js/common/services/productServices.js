@@ -21,6 +21,11 @@
             createProduct: function(prod){
                 return $http.post(`api/products`, prod)
                     .then(response => response.data)
+            },
+
+            deleteProduct: function(prod){
+                return $http.delete(`api/products/${prod._id}`, prod)
+                    .then(response => response.data)
             }
            
 

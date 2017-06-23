@@ -49,10 +49,10 @@ router.put('/:productId', (req,res,next) =>{
 });
 
 router.delete('/:productId', (req, res, next) => {
-  if(req.user){
-    Product.remove({_id:req.product._id}).exec()
+  // if(req.user){
+    Product.remove({_id:req.params.productId}).exec()
       .then(removed => res.status(200).send(removed))
       .then(null, next);
-  } next();
+  // } next();
 })
 

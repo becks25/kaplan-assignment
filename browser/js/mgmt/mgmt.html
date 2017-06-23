@@ -28,6 +28,9 @@
 			<b ng-if="!prod.edit">{{prod.name}}</b>
 			<input type="text" ng-model="prod.name" ng-if="prod.edit"/>
 		</div>
+		<div class="col-xs-1">
+			<span ng-if="prod.edit" class="error" ng-click="deleteProduct(prod)">Delete</span>
+		</div>
 
 	</div>
 
