@@ -14,7 +14,7 @@
 	<div ng-repeat="prod in products" ng-class-even="'even'" class="col-xs-12 prod">
 		<div class="col-xs-1">
 			<span ng-click="prod.edit = true" ng-if="!prod.edit">Edit</span>
-			<span ng-click="prod.edit = false" ng-if="prod.edit">Save</span>
+			<span ng-click="updateProd(prod)" ng-if="prod.edit">Save</span>
 		</div>
 		<div class="col-xs-2">
 			<span ng-if="!prod.edit">{{prod.quantity}}</span>

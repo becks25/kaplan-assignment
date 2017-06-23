@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
 router.put('/:productId', (req,res,next) =>{
 
   //when someone makes a purchase, the product inventory should update
-  if(req.body.prod.sold_quantity){
+  if(req.body.prod){
     Product.findOne({_id: req.body.prod.product_sku})
     .then(prod => {
       prod.quantity -= req.body.prod.sold_quantity;
@@ -41,11 +41,15 @@ router.put('/:productId', (req,res,next) =>{
         .then(p => res.status(200).send(p));
     })
   }else{
-    _.assign(req.product, req.body);
-    req.product.save()
-      .then(prod => res.status(200).send(prod))
-      .then(null, next);
-    }
+    Product.findOne({_id:req.body._id})
+    .then(prod => {
+      _.assign(prod, req.body);
+      prod.save()
+        .then(p => res.status(200).send(p))
+        .then(null, next);
+    })
+    .then(null, next);
+  }
 });
 
 router.delete('/:productId', (req, res, next) => {

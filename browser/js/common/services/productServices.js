@@ -14,7 +14,7 @@
 
             updateProduct: function(prod){
                 console.log('updating', prod);
-                return $http.put(`api/products/${prod.product_sku}`, {prod})
+                return $http.put(`api/products/${prod.product_sku}`, prod)
                     .then(response => response.data)
             },
 

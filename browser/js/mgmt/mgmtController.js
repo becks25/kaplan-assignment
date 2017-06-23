@@ -49,4 +49,11 @@ app.controller('mgmtCtrl', ($scope, $state, products, $stateParams, $rootScope,o
       })
   }
 
+  $scope.updateProd = function(p){
+    productServices.updateProduct(p)
+      .then(res => {
+        p.edit = false;
+      });
+  };
+
 });
