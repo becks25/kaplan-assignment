@@ -1,8 +1,9 @@
 #home {
   margin-top:15%;
+
   .btn{
   	width:30%;
-  	border: 2px solid #77c530;
+  	border: 2px solid $green;
   	border-radius: 5px;
   	background-color:white;
   	margin:auto;
@@ -11,7 +12,7 @@
   	margin-bottom:5%;
 
     &:hover{
-      background-color: rgba(#77c530, 0.2);
+      background-color: rgba($green, 0.2);
     }
   }
 }

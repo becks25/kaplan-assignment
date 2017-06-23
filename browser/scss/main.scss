@@ -6,6 +6,8 @@ body {
   background: #fdfdfd;
 }
 
+$green: #77c530;
+
 @mixin clearfix {
   &:after {
     content: "";
@@ -35,18 +37,18 @@ h1{
 	margin:auto;
 	text-align:center;
 	button{
-		border: 2px solid #77c530;
+		border: 2px solid $green;
 		border-radius:5px;
 		width:30%;
 		padding:1%;
-		background-color: rgba(#77c530, 0.3);
+		background-color: rgba($green, 0.3);
 		margin-top:2%;
 		margin-bottom: 1%;
 	}
 }
 
 .even{
-	background-color: rgba(#77c530, 0.3);
+	background-color: rgba($green, 0.3);
 }
 
 .error{

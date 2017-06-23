@@ -7,7 +7,7 @@
 	margin:1% 7% 1% 7%;
 
 	.title{
-		background-color:#77c530;
+		background-color:$green;
 		width:100%;
 		padding:1% 2% 2% 2%;
 	}
@@ -25,7 +25,7 @@
 		input{
 			width:90%;
 			border:none;
-			border-bottom: 2px solid #77c530;
+			border-bottom: 2px solid $green;
 			padding:1%;
 		}
 
