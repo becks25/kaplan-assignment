@@ -4,21 +4,27 @@
 
 <div id="client">
 	<div class="order-form">
-		<div class="order" ng-repeat="prod in products">
+		<div class="even col-xs-12 title">
+			<div class="col-xs-2"><h5>Quantity</h5></div>
+			<div class="col-xs-2"><h5>Price</h5></div>
+			<div class="col-xs-8"><h5>Product</h5></div>
+		</div>
+		<p class="clearfix"></p>
+		<div class="order" ng-repeat="prod in products" ng-class-even="'even'" >
 			<div class="col-xs-2">
 				<select ng-model="prod.order" ng-change="updateTotal()">
-					<option ng-repeat="n in getNumber(prod.quantity+1) track by $index" value="{{$index}}">{{$index}}</option>
+					<option ng-repeat="n in getNumber(prod.quantity+1) track by $index" value="{{$index}}" ng-selected="$index==0">{{$index}}</option>
 				</select>
 			</div>
 
-			<div class="col-xs-2">${{prod.unit_price}}</div>
+			<div class="col-xs-2">${{prod.unit_price | number:2}}</div>
 			<div class="col-xs-8">{{prod.name}}</div>
 			<p class="clearfix"></p>
 
 		</div>
 
 		<div class="total">
-			<p><b>Total: </b> ${{total | number:2}}</p>
+			<p><h5><b>Total: </b> ${{total | number:2}}</h5></p>
 		</div>
 		<div class="center">
 			<div class="center"><button ng-click="submit()">Submit order</button></div>

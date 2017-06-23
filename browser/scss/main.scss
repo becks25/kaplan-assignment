@@ -45,6 +45,10 @@ h1{
 	}
 }
 
+.even{
+	background-color: rgba(#77c530, 0.3);
+}
+
 @import 'home/main';
 @import 'login/main';
 @import 'client/main';

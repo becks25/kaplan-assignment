@@ -4,7 +4,7 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
 
   //initialize order settings
   $scope.products.forEach(function(prod){
-    prod.order = 0;
+    prod.order = '0';
   });
 
   $scope.getNumber = function(num) {

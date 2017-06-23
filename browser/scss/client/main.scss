@@ -4,19 +4,24 @@
 
 	.order-form{
 		border:1px solid black;
-		padding-top:1%;
+		border-radius:2px;
 	}
 	
 
-	.order{
-		text-align:center;
-	}
 
 	.total{
 		border-top: 1px solid black;
 		padding:1%;
+		text-align:center;
 	}
 
+	select{
+		width:100%;
+	}
 
+	.title{
+		margin-left:0;
+		padding-left:0;
+	}
 
 }
