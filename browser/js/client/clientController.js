@@ -1,9 +1,10 @@
-app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices) => {
+app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope,orderServices, productServices) => {
   $scope.products = products;
   $scope.total = 0;
   $scope.error = false;
   $scope.success = false;
   $scope.uploadFile;
+  $scope.order_items = [];
 
   document.getElementById('orderUpload').addEventListener('change', $scope.upload, false);
 
@@ -35,48 +36,34 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
     var order_items = [];
     var order = {};
 
+    //if a file has been uploaded, process
     if(up.files[0]){
-      console.log($scope.uploadFile);
       var reader = new FileReader();
           reader.readAsText(up.files[0]);
-          console.log(reader);
 
-          reader.onload = function(event) {
+          reader.onloadend = function(event) {
+            
                 var csvData = event.target.result;
                 var data = csvData.split(/\n/);
                 var titles = data[0].split(',');
-                var total = 0;
 
                 for(var i = 1; i< data.length; i++){
-                  var curr = data[i].split(',');
-
-                  var temp = {
-                    sold_quantity: curr[0]
-                  }
-
-                  //find out sku & unit_price
-                  var prod =  _.where($scope.products, {name: curr[1].toLowerCase()});
-
-                  if(prod[0]){
-                    temp.unit_price = prod[0].unit_price;
-                    temp.product_sku = prod[0]._id;
-                    $scope.total += temp.unit_price * temp.sold_quantity;
-                    order_items.push(temp);
-                  }
-                  //if item isn't found, it isn't added to the order
-
-                }
+                    var curr = data[i].split(',');    
+                    $scope.addItem(curr[1], curr[0]);
+                };
 
                 order.amount= $scope.total;
-                //send order req
-                orderServices.createOrder(order, order_items)
+                    //send order req
+
+                orderServices.createOrder(order, $scope.order_items)
                   .then(function(res){
                     //reset everything & show success message
+                    up.value = '';
                     $scope.resetForm();
+                    $scope.total = '0';
                     $scope.success = true;
                   });
-
-            };
+        };
 
     }else{
       //make sure at least one item has been selected
@@ -107,5 +94,24 @@ app.controller('clientCtrl', ($scope, $state, products, $stateParams, $rootScope
 
     }
   }
+
+
+$scope.addItem = function(name, num){
+  var temp = {
+    sold_quantity: num,
+    name: name
+  };
+
+  $scope.products.forEach(p => {
+    //remove any trailing characters
+    var t = temp.name.slice(0, p.name.length);
+      if(p.name == t){
+        temp.unit_price = p.unit_price;
+        temp.product_sku = p._id;
+        $scope.total += temp.unit_price * temp.sold_quantity;
+        $scope.order_items.push(temp);
+      }
+    })
+}
 
 });
