@@ -111,7 +111,8 @@ $scope.addItem = function(name, num){
         $scope.total += temp.unit_price * temp.sold_quantity;
         $scope.order_items.push(temp);
       }
-    })
+    });
+
 }
 
 });
