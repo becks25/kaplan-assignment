@@ -105,7 +105,7 @@ $scope.addItem = function(name, num){
   $scope.products.forEach(p => {
     //remove any trailing characters
     var t = temp.name.slice(0, p.name.length);
-      if(p.name == t){
+      if(p.name.toLowerCase() == t.toLowerCase()){
         temp.unit_price = p.unit_price;
         temp.product_sku = p._id;
         $scope.total += temp.unit_price * temp.sold_quantity;
